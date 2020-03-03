@@ -4,35 +4,35 @@ import cn.xpbootcamp.tennis.TennisGame;
 
 public class TennisGame3 implements TennisGame {
 
-    private int p2;
-    private int p1;
-    private String p1N;
-    private String p2N;
+    private int p2Score;
+    private int p1Score;
+    private String p1Name;
+    private String p2Name;
+    private final String[] SCORE_DESCRIPTIONS = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
 
-    public TennisGame3(String p1N, String p2N) {
-        this.p1N = p1N;
-        this.p2N = p2N;
+    public TennisGame3(String p1Name, String p2Name) {
+        this.p1Name = p1Name;
+        this.p2Name = p2Name;
     }
 
     public String getScore() {
-        String s;
-        if (p1 < 4 && p2 < 4 && !(p1 + p2 == 6)) {
-            String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
-            s = p[p1];
-            return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+        String p1Description;
+        if (p1Score < 4 && p2Score < 4 && !(p1Score + p2Score == 6)) {
+            p1Description = SCORE_DESCRIPTIONS[p1Score];
+            return (p1Score == p2Score) ? p1Description + "-All" : p1Description + "-" + SCORE_DESCRIPTIONS[p2Score];
         } else {
-            if (p1 == p2)
+            if (p1Score == p2Score)
                 return "Deuce";
-            s = p1 > p2 ? p1N : p2N;
-            return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
+            p1Description = p1Score > p2Score ? p1Name : p2Name;
+            return ((p1Score - p2Score) * (p1Score - p2Score) == 1) ? "Advantage " + p1Description : "Win for " + p1Description;
         }
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            this.p1 += 1;
+        if (p1Name.equals(playerName))
+            this.p1Score += 1;
         else
-            this.p2 += 1;
+            this.p2Score += 1;
 
     }
 
